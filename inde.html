@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apexflow Market Dollar Hunters - Ehaldart Global FX & Binary</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="app-header">
+        <div class="brand">
+            <svg class="logo-icon" viewBox="0 0 100 100" width="32" height="32">
+                <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" fill="none" stroke="#00ff66" stroke-width="6"/>
+                <path d="M30 65 L50 30 L70 65 M40 50 L60 50" fill="none" stroke="#00ff66" stroke-width="6"/>
+            </svg>
+            <div class="brand-text">
+                <h1>APEXFLOW MARKET DOLLAR HUNTERS</h1>
+                <span>EHALDART GLOBAL FX &amp; BINARY</span>
+            </div>
+        </div>
+        <div class="account-panel">
+            <div class="balance-display">
+                <span class="label">Balance:</span>
+                <span id="accountBalance" class="value">$0.00</span>
+            </div>
+            <div class="account-info">
+                <span id="accountID" class="acc-id">Not Connected</span>
+            </div>
+            <button id="authBtn" class="btn btn-neon">Connect Token</button>
+        </div>
+    </header>
+
+    <main class="trading-layout">
+        <!-- Sidebar Controls -->
+        <aside class="control-panel">
+            <section class="panel-section">
+                <h3>Market Selection</h3>
+                <div class="form-group">
+                    <label for="marketSelect">Symbol</label>
+                    <select id="marketSelect" class="input-field">
+                        <optgroup label="Synthetic Indices">
+                            <option value="R_100">Volatility 100 Index</option>
+                            <option value="R_75">Volatility 75 Index</option>
+                            <option value="R_50">Volatility 50 Index</option>
+                            <option value="R_25">Volatility 25 Index</option>
+                            <option value="R_10">Volatility 10 Index</option>
+                            <option value="1HZ100V">Volatility 100 (1s) Index</option>
+                            <option value="1HZ75V">Volatility 75 (1s) Index</option>
+                        </optgroup>
+                        <optgroup label="Forex Major">
+                            <option value="frxEURUSD">EUR/USD</option>
+                            <option value="frxGBPUSD">GBP/USD</option>
+                            <option value="frxUSDJPY">USD/JPY</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </section>
+
+            <section class="panel-section">
+                <h3>Contract Setup</h3>
+                <div class="form-group">
+                    <label for="contractType">Trade Type</label>
+                    <select id="contractType" class="input-field">
+                        <option value="CALL">Higher / Rise (CALL)</option>
+                        <option value="PUT">Lower / Fall (PUT)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tradeDuration">Duration (Ticks)</label>
+                    <input type="number" id="tradeDuration" class="input-field" value="5" min="1" max="10">
+                </div>
+                <div class="form-group">
+                    <label for="tradeStake">Stake (USD)</label>
+                    <input type="number" id="tradeStake" class="input-field" value="10" min="0.35" step="0.5">
+                </div>
+                <button id="btnPurchase" class="btn btn-trade">EXECUTE TRADE</button>
+            </section>
+
+            <section class="panel-section">
+                <h3>Automated Bot Control</h3>
+                <div class="bot-grid">
+                    <button id="btnAutoStart" class="btn btn-bot btn-start">Auto Start</button>
+                    <button id="btnAutoPause" class="btn btn-bot btn-pause">Pause</button>
+                    <button id="btnAutoResume" class="btn btn-bot btn-resume">Resume</button>
+                    <button id="btnAutoStop" class="btn btn-bot btn-stop">Stop Bot</button>
+                </div>
+                <div class="bot-status-box">
+                    <span>Bot Engine: </span><strong id="botStatus">Idle</strong>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Main Chart & Positions Canvas -->
+        <section class="workspace">
+            <div class="chart-wrapper">
+                <div class="chart-header">
+                    <span id="activeSymbolDisplay">Volatility 100 Index</span>
+                    <span id="livePriceDisplay" class="live-price">0.0000</span>
+                </div>
+                <div class="canvas-container">
+                    <canvas id="marketChart"></canvas>
+                </div>
+            </div>
+
+            <div class="tables-wrapper">
+                <div class="tab-headers">
+                    <button class="tab-btn active" data-tab="open-positions">Open Positions</button>
+                    <button class="tab-btn" data-tab="trade-history">Trade History</button>
+                </div>
+                <div class="tab-content active" id="open-positions">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Contract ID</th>
+                                <th>Type</th>
+                                <th>Buy Price</th>
+                                <th>Current Price</th>
+                                <th>Profit/Loss</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="openPositionsBody">
+                            <tr><td colspan="6" class="empty">No active contracts.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-content" id="trade-history">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Contract ID</th>
+                                <th>Symbol</th>
+                                <th>Stake</th>
+                                <th>Payout</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tradeHistoryBody">
+                            <tr><td colspan="5" class="empty">No completed transactions.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for API Credentials Authentication -->
+    <div id="authModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h2>Deriv API Credentials</h2>
+            <p>Connect using your Deriv Personal Access Token or OAuth Session[span_8](start_span)[span_8](end_span).</p>
+            <div class="form-group">
+                <label for="inputAppID">App ID</label>
+                <input type="text" id="inputAppID" class="input-field" value="1089">
+            </div>
+            <div class="form-group">
+                <label for="inputToken">Personal Access Token (PAT)</label>
+                <input type="password" id="inputToken" class="input-field" placeholder="Paste PAT key here">
+            </div>
+            <div class="modal-actions">
+                <button id="btnSaveAuth" class="btn btn-neon">Save &amp; Connect</button>
+                <button id="btnCloseAuth" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
