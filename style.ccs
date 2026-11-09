@@ -1,0 +1,328 @@
+:root {
+    --bg-main: #06090f;
+    --bg-card: #0d131f;
+    --bg-input: #131c2e;
+    --neon-green: #00ff66;
+    --neon-green-hover: #00cc52;
+    --neon-glow: rgba(0, 255, 102, 0.25);
+    --red-alert: #ff3366;
+    --text-light: #f8fafc;
+    --text-muted: #64748b;
+    --border-color: #1e293b;
+    --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    font-family: var(--font-family);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Branding */
+.app-header {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-text h1 {
+    font-size: 1.1rem;
+    color: var(--neon-green);
+    letter-spacing: 1.2px;
+    text-shadow: 0 0 10px var(--neon-glow);
+}
+
+.brand-text span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.account-panel {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.balance-display .value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--neon-green);
+    margin-left: 6px;
+    text-shadow: 0 0 8px var(--neon-glow);
+}
+
+.acc-id {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--bg-input);
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+/* Main Layout Grid */
+.trading-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.panel-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.panel-section h3 {
+    font-size: 0.9rem;
+    color: var(--neon-green);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.input-field {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-light);
+    padding: 10px;
+    border-radius: 6px;
+    outline: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.input-field:focus {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-glow);
+}
+
+/* Buttons */
+.btn {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-neon {
+    background: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 12px var(--neon-glow);
+}
+
+.btn-neon:hover {
+    background: var(--neon-green-hover);
+    box-shadow: 0 0 18px var(--neon-green);
+}
+
+.btn-trade {
+    width: 100%;
+    background: var(--neon-green);
+    color: #000;
+    font-size: 1rem;
+    padding: 12px;
+    box-shadow: 0 0 12px var(--neon-glow);
+}
+
+.btn-trade:hover {
+    background: var(--neon-green-hover);
+    box-shadow: 0 0 20px var(--neon-green);
+}
+
+.btn-bot {
+    font-size: 0.75rem;
+    padding: 8px;
+}
+
+.btn-start { background: #10b981; color: white; }
+.btn-pause { background: #f59e0b; color: white; }
+.btn-resume { background: #3b82f6; color: white; }
+.btn-stop { background: var(--red-alert); color: white; }
+
+.bot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.bot-status-box {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* Workspace Canvas & Data Tables */
+.workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.chart-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.25rem;
+    flex: 1;
+    min-height: 350px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.live-price {
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-glow);
+}
+
+.canvas-container {
+    height: 300px;
+    position: relative;
+}
+
+.tables-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tab-headers {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.tab-btn.active {
+    color: var(--neon-green);
+    border-bottom: 2px solid var(--neon-green);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.data-table th, .data-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    color: var(--text-muted);
+}
+
+.data-table td.empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(4, 6, 10, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-overlay.hidden { display: none; }
+
+.modal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 32px rgba(0, 255, 102, 0.1);
+}
+
+.modal-card h2 {
+    color: var(--neon-green);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px var(--neon-glow);
+}
+
+.modal-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
